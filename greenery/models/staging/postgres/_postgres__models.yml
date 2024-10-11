@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: stg_orders
+    description: Fact table for orders
+  - name: stg_addresses
+    description:  Info about addresses (dim table)
+  - name: stg_users
+    description:  Info about users (dim table)
+  - name: stg_events
+    description:  Info about events (dim table)
+  - name: stg_products
+    description:  Info about products (dim table)
+  - name: stg_order_items
+    description:  Info about order_items (dim table)
+  - name: stg_promos
+    description:  Info about promos (dim table)

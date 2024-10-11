@@ -1,0 +1,35 @@
+version: 2
+
+sources:
+
+  - name: postgres # name of the source
+    database: raw # this is the name of the database that our source data lives in
+    schema: public # this is the schema our raw data lives in
+
+    #quoting:
+    #  database: false
+    #  schema: false
+    #  identifier: false
+
+    #freshness: # this is where we define freshness thresholds
+    #  warn_after: {count: 24, period: hour}
+    #  error_after: {count: 48, period: hour}
+
+    tables: # this is where we define table metadata (name, description, load timestamps)
+      - name: orders 
+        loaded_at_field: created_at
+        description: Fact table for orders
+      - name: addresses
+        description: Info about addresses (dim table)
+      - name: users
+        loaded_at_field: updated_at
+        description: Info about users (dim table)  
+      - name: events
+        loaded_at_field: created_at
+        description:  Info about events (dim table)
+      - name: products
+        description:  Info about products (dim table)
+      - name: order_items
+        description:  Info about order items (dim table)
+      - name: promos
+        description:  Info about promos (dim table)
