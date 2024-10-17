@@ -40,25 +40,35 @@ from user_counts
 
 
 ### What are good indicators of a user who will likely purchase again? What about indicators of users who are likely NOT to purchase again? If you had more data, what features would you want to look into to answer this question?
-NOTE: This is a hypothetical question vs. something we can analyze in our Greenery data set. Think about what exploratory analysis you would do to approach this question.
 
 **Answer:**
- Good indicators of a user who will purchase again is if the user was happy with the product/products ordered.  Would be great to have data about returns and reviews from users.  I would look at number of orders, number of returns and the reviews for each customer to see if a good review and few returns result in more orders as I would expect.  
-
-Indicators of users who are likely not to purchase again is if the user is not happy with the purchase.  So I would look at the same data as mentioned above to see if bad reviews and more returns result in less orders.  Other factors that could make the user unhappy is if the delivery time of the order is longer than expected and also if the product is too expensive.
+- Good indicators of a user who will purchase again is if the user was happy with the product/products ordered.  Would be great to have data about returns and reviews from users.  I would look at number of orders, number of returns and the reviews for each customer to see if a good review and few returns result in more orders as I would expect.  
+- Indicators of users who are likely not to purchase again is if the user is not happy with the purchase.  So I would look at the same data as mentioned above to see if bad reviews and more returns result in less orders.  Other factors that could make the user unhappy is if the delivery time of the order is longer than expected and also if the product is too expensive.
 
 
 ### Product mart
 The product mart uses the following models:  int_products_viewed_events, int_session_info, fact_page_views.  The reason for why I have the intermediate folder under models instead of under each mart folder is because some intermediate models will be used for different marts.
 
-Each row in fact_page_views is for each product that a specific user looks at in a session.  The main source table for this mart table stg_events but some data transformation needed to be done.  There are 4 different event types in the stg_events table:  page_view, add_to_cart, checkout and package_shipped.  All sessions have the event page_view and this event has an associated product_id so we can see which product is being looked at.  Then a session can have an add_to_cart event which is also associated with product_id so we can see what product is being added to cart.  The checkout event corresponds to a purchase, this event does not have a product_id but instead an order_id.  This is because there will only be one checkout event for each session, so only one order if products are purchased. Note that many products can be added to cart and then they are all in the same order.  The package_shipped event also has an order_id and not a product_id. 
+Each row in fact_page_views is for each product that a specific user looks at in a session.  The main source table for this mart table stg_events but some data transformation needed to be done.  
 
-So we have product specific events = page_view and add_to_cart, and we have order specific events = checkout and package_shipped.
+There are 4 different event types in the stg_events table:  page_view, add_to_cart, checkout and package_shipped.  
+- All sessions have the event page_view and this event has an associated product_id so we can see which product is being looked at.  
+- A session can have an add_to_cart event which is also associated with product_id so we can see what product is being added to cart.  
+- The checkout event corresponds to a purchase, this event does not have a product_id but instead an order_id.  This is because there will only be one checkout event for each session. 
+- The package_shipped event also has an order_id and not a product_id. 
+
+So we have product specific events:
+- page_view
+- add_to_cart
+
+and we have order specific events
+- checkout
+- package_shipped.
 
 I decided to break the logic down into two intermediate models.
-- In int_products_viewed_events:  In this model we count page_views and added_to_cart for each session, user and product.  We make sure that we only look at rows that have the count of page_views > 0.  I did some data investigation and the events table only has sessions that have a page_view.
-- In int_session_info:   find the session start and end as well as order_id for the sessions that lead to a purchase.
-- In fact_page_views:  Join int_products_viewed_events and int_session_info and stg_order_items (to get quantity)
+- **In int_products_viewed_events:**  In this model we count page_views and added_to_cart for each session, user and product.  We make sure that we only look at rows that have the count of page_views > 0.  I did some data investigation and the events table only has sessions that have a page_view.
+- **In int_session_info:**   find the session start and end as well as order_id for the sessions that lead to a purchase.
+- **In fact_page_views:**  Join int_products_viewed_events and int_session_info and stg_order_items (to get quantity)
 
 I did not add any dimension tables in the product mart.  My thought was that the dimensions added in the core schema will be used with fact_page_views.
 
