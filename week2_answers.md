@@ -42,7 +42,7 @@ from user_counts
 ### What are good indicators of a user who will likely purchase again? What about indicators of users who are likely NOT to purchase again? If you had more data, what features would you want to look into to answer this question?
 NOTE: This is a hypothetical question vs. something we can analyze in our Greenery data set. Think about what exploratory analysis you would do to approach this question.
 
-** Answer:**
+**Answer:**
  Good indicators of a user who will purchase again is if the user was happy with the product/products ordered.  Would be great to have data about returns and reviews from users.  I would look at number of orders, number of returns and the reviews for each customer to see if a good review and few returns result in more orders as I would expect.  
 
 Indicators of users who are likely not to purchase again is if the user is not happy with the purchase.  So I would look at the same data as mentioned above to see if bad reviews and more returns result in less orders.  Other factors that could make the user unhappy is if the delivery time of the order is longer than expected and also if the product is too expensive.
@@ -60,7 +60,10 @@ I decided to break the logic down into two intermediate models.
 - In int_session_info:   find the session start and end as well as order_id for the sessions that lead to a purchase.
 - In fact_page_views:  Join int_products_viewed_events and int_session_info and stg_order_items (to get quantity)
 
-I did not add any dimension tables in the product mart.  My thought was that the dimensions added in the core schema will be used with fact_page_views.### DAG
+I did not add any dimension tables in the product mart.  My thought was that the dimensions added in the core schema will be used with fact_page_views.
+
+### DAG
+![Screenshot of DAG](greenery/images/Week2_DAG.png)
 ￼
 
 
