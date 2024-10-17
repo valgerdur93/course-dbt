@@ -1,0 +1,6 @@
+version: 2
+
+models:
+  - name: fact_page_views
+    description: 
+      Create fact table for all sessions that have a page view.

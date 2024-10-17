@@ -1,0 +1,6 @@
+version: 2
+
+models:
+  - name: fact_user_orders
+    description:
+      Order information at the user level

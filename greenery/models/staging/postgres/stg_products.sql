@@ -1,12 +1,11 @@
-{{
-  config(
-    materialized='table'
-  )
-}}
+WITH raw_products AS (
+  SELECT *
+  FROM {{source('postgres','products')}}
+)
 
 SELECT 
     product_id,
     name,
     price,
     inventory
-FROM {{source('postgres','products')}}
+FROM raw_products

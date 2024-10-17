@@ -1,8 +1,8 @@
-{{
-  config(
-    materialized='table'
-  )
-}}
+WITH raw_users AS (
+  SELECT *
+  FROM {{source('postgres','users')}}
+)
+
 
 SELECT 
     user_id,
@@ -13,4 +13,4 @@ SELECT
     created_at,
     updated_at,
     address_id
-FROM {{source('postgres','users')}}
+FROM raw_users

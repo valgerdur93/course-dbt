@@ -1,17 +1,78 @@
 version: 2
 
 models:
-  - name: stg_orders
-    description: Fact table for orders
-  - name: stg_addresses
-    description:  Info about addresses (dim table)
-  - name: stg_users
-    description:  Info about users (dim table)
-  - name: stg_events
-    description:  Info about events (dim table)
-  - name: stg_products
-    description:  Info about products (dim table)
   - name: stg_order_items
     description:  Info about order_items (dim table)
+    columns:
+    - name: quantity
+      description: The product quantity ordered
+      tests:
+        - positive_values
+  - name: stg_orders
+    description: Fact table for orders
+    columns:
+      - name: order_id
+        description: The primary key of the orders table
+        tests:
+          - not_null
+          - unique
+      - name: order_cost
+        description: The cost of the order itself
+        tests: 
+          - positive_values
+      - name: shipping_cost
+        description: The cost of the shipping_cost
+        tests:
+          - positive_values
+      - name: order_total
+        description: The order_cost+shipphing_cost
+        tests:
+          - positive_values
+  - name: stg_addresses
+    description:  Info about addresses (dim table)
+    columns:
+      - name: address_id
+        description: The primary key of the address table
+        tests:
+          - not_null
+          - unique
+  - name: stg_users
+    description:  Info about users (dim table)
+    columns:
+      - name: user_id
+        description: The primary key of the user table
+        tests: 
+          - not_null
+          - unique
+  - name: stg_events
+    description:  Info about events (dim table)
+    columns:
+      - name: event_id
+        description: The primary key of the event table
+        tests:
+          - not_null
+          - unique
+  - name: stg_products
+    description:  Info about products (dim table)
+    columns: 
+      - name: product_id
+        description: The primary key of the product table
+        tests:
+          - not_null
+          - unique
+      - name: price
+        description: product price
+        tests:
+          - positive_values
+      - name: inventory
+        description: product inventory
+        tests: 
+          - positive_values
   - name: stg_promos
     description:  Info about promos (dim table)
+    columns:
+      - name: promo_id
+        description:  The primary key of the promos table
+        tests:
+          - not_null
+          - unique

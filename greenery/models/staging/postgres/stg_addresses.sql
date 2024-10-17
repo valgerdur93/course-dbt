@@ -1,8 +1,8 @@
-{{
-  config(
-    materialized='table'
-  )
-}}
+
+WITH raw_addresses AS (
+  SELECT *
+  FROM {{source('postgres','addresses')}}
+)
 
 SELECT 
     address_id,
@@ -10,4 +10,4 @@ SELECT
     zipcode,
     state,
     country
-FROM {{source('postgres','addresses')}}
+FROM raw_addresses

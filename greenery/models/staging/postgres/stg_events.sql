@@ -1,8 +1,7 @@
-{{
-  config(
-    materialized='table'
-  )
-}}
+WITH raw_events AS (
+  SELECT *
+  FROM {{source('postgres','events')}}
+)
 
 SELECT 
     event_id,
@@ -13,4 +12,4 @@ SELECT
     created_at,
     order_id,
     product_id
-FROM {{source('postgres','events')}}
+FROM raw_events

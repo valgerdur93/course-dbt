@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: int_products_viewed_events
+    description: |
+      For each session, user and product => count page views and added to cart (product based events).  
+      Filter out rows where page_views = 0 since we are only interested in products 
+      that have been viewed.
+  - name: int_session_info
+    description: |
+      Find start and end timestamp for each session and order_id for each session that lead to 
+      a purchase.
+  - name: int_order_items
+    description: 
+      Joining stg_orders and stg_order_items.  Each row is on order_item level
+  - name: int_product_url
+    description: 
+      Get product url from the events table.

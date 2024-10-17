@@ -1,8 +1,7 @@
-{{
-  config(
-    materialized='table'
-  )
-}}
+WITH raw_orders AS (
+  SELECT *
+  FROM {{source('postgres','orders')}}
+)
 
 SELECT 
     order_id,
@@ -18,4 +17,4 @@ SELECT
     estimated_delivery_at,
     delivered_at,
     status
-FROM {{source('postgres','orders')}}
+FROM raw_orders

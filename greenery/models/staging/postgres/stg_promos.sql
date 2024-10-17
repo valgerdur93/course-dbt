@@ -1,11 +1,10 @@
-{{
-  config(
-    materialized='table'
-  )
-}}
+WITH raw_promos AS (
+  SELECT *
+  FROM {{source('postgres','promos')}}
+)
 
 SELECT 
     promo_id,
     discount,
     status
-FROM {{source('postgres','promos')}}
+FROM raw_promos

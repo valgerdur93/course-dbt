@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: dim_users
+    description:
+      User dimensions
+  - name: dim_products
+    description:
+      Product dimensions
+  - name: dim_addresses
+    description:
+      Address dimensions
+  - name: dim_promos
+    description:
+      Promo dimensions
+  - name: fact_orders
+    description:
+      Order facts
