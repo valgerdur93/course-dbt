@@ -1,7 +1,9 @@
 # Week 2
 ## Part 1
 
-### What is our user repeat rate?  Repeat Rate = Users who purchased 2 or more times / users who purchased
+### What is our user repeat rate?  
+
+Repeat Rate = Users who purchased 2 or more times / users who purchased
 
 ```sql
 -- All users that have made an order are in the stg_orders table
