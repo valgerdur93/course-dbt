@@ -15,8 +15,8 @@ SELECT p.session_id
         , p.product_id
         , page_views
         , added_to_cart
-        , CASE WHEN s.order_id IS NOT NULL THEN 1 ELSE 0 END AS is_purchased
-        , s.order_id
+        , CASE WHEN added_to_cart > 0 AND s.order_id IS NOT NULL THEN 1 ELSE 0 END AS is_purchased
+        , CASE WHEN added_to_cart >0 THEN s.order_id ELSE NULL END AS order_id
         , quantity
         , session_start_at
         , session_end_at
