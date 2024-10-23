@@ -1,3 +1,4 @@
+
 WITH stg_events AS (
     SELECT *
     FROM {{ref('stg_events')}}
@@ -5,11 +6,17 @@ WITH stg_events AS (
 -- Only look at events for products, so that is why product_id NULL is excluded
 -- Data investigation showed that product_id is null for other events than page_view and add_to_cart
 product_events AS (
-    SELECT session_id
-            , user_id
-            , product_id
-            , CASE WHEN event_type = 'page_view' THEN 1 ELSE 0 END AS page_views
-            , CASE WHEN event_type = 'add_to_cart' THEN 1 ELSE 0 END AS added_to_cart
+    SELECT session_id,
+            user_id,
+            product_id,
+            {%- for event_type in get_product_event_type() %}
+            case when event_type = '{{event_type}}' then 1 else 0 end as {{event_type}}
+            {%- if not loop.last %},{% endif -%}
+            {% endfor %}
+            -- Jinja for loop and a custom made macro used instead of having to repear CASE WHEN many times
+            -- Had to move the commas to the end of line instead of in front of the column names to make this work
+            --, CASE WHEN event_type = 'page_view' THEN 1 ELSE 0 END AS page_views
+            --, CASE WHEN event_type = 'add_to_cart' THEN 1 ELSE 0 END AS added_to_cart
     FROM stg_events
     WHERE product_id IS NOT NULL
 ),
@@ -18,8 +25,8 @@ aggregated_product_events AS (
     SELECT session_id
         , user_id
         , product_id
-        , sum(page_views) AS page_views
-        , sum(added_to_cart) AS added_to_cart
+        , sum(page_view) AS page_views
+        , sum(add_to_cart) AS added_to_cart
     FROM product_events
     GROUP BY session_id
         , user_id

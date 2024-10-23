@@ -52,6 +52,12 @@ models:
         tests:
           - not_null
           - unique
+      - name: event_type
+        description: Categorical value for event types
+        tests:  
+          - dbt_expectations.expect_column_values_to_be_in_set:
+              column_name: event_type
+              value_set: ['page_view', 'add_to_cart', 'checkout', 'packege_shipped']
   - name: stg_products
     description:  Info about products (dim table)
     columns: 

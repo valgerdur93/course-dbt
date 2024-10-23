@@ -1,0 +1,9 @@
+version: 2
+
+macros:
+  - name: get_product_event_type
+    description:  Gets a list of event types available for products
+  - name: grant
+    description:  |
+      Grants two permissions to the specified role, 1) usage on the schema, 2) select on the table.  
+      Added as post-hook in dbt_project.yml
