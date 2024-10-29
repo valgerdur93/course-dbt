@@ -4,3 +4,6 @@ models:
   - name: fact_page_views
     description: 
       Create fact table for all sessions that have a page view.
+  - name: fact_product_funnel
+    description:
+      Count of distinct sessions for specific event types per product_id.  Aggregated version of fact_page_views.

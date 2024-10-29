@@ -3,8 +3,7 @@ WITH stg_events AS (
     SELECT *
     FROM {{ref('stg_events')}}
 ),
--- Only look at events for products, so that is why product_id NULL is excluded
--- Data investigation showed that product_id is null for other events than page_view and add_to_cart
+
 product_events AS (
     SELECT session_id,
             user_id,
