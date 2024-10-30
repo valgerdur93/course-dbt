@@ -137,14 +137,15 @@ The table fact_product_funnel was then used in the sigma dashboard created where
 **Answer:**
 578 sessions had a page view event, then 467 sessions (80%) also had an add to cart event and then 361 sessions (62%) had a checkout event.  This means that 42% of all sessions do not lead to a purchase.
 
-If we look at the drop off between add to cart and checkout, where the number of sessions go from 467 to 361.  It would be interesting to know why products are added to cart and then not purchased, is it because they go out of stock or is it because of a different reason.
-
 I created a Product Funnel dashboard for the Product and Engineering teams to be able to monitor the product funnel and purchases made.  This is a link to the dashboard: 
  https://app.sigmacomputing.com/corise-dbt/workbook/workbook-4qBWAMm7fn2f4PhMTHBxT5?:link_source=share 
 
-In the dashboard we can see that the most popular product is String of pearls which went out of stock in week 3.  It is likely we had gotten more purchases for String of pearls if it had not been out of stock.
+ In the dashboard you can see hte product funnel as well as the conversion rates per product.
 
-In the dashboard we can also see that the revenue between states differ.  It would be interesting to understand why we have more purchases in certain states.
+ Things that would be interesting to investigate further:
+ - It would be interesting to know why products are added to cart and then not purchased, is it because they go out of stock or is it because of a different reason.
+ - In the dashboard we can see that the most popular product is String of pearls which went out of stock in week 3.  It is likely we had gotten more purchases for String of pearls if it had not been out of stock.
+ - In the dashboard we can also see that the revenue between states differ.  It would be interesting to understand why we have more purchases in certain states.
 
 
 
