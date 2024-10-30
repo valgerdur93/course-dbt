@@ -159,6 +159,8 @@ The largest drop off is between page views and add to cart, it is 20%.
 
 An exposure for the Product Funnel dashboard was created and it can be seen in the DAG.
 
+![Screenshot of DAG](greenery/images/Week4_DAG.png)
+
 
 ## Part 3:  Reflection questions
 
