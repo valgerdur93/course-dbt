@@ -10,3 +10,8 @@ exposures:
       name: Valgerður Tryggvadóttir
     depends_on:
       - ref('fact_product_funnel')
+      - ref('dim_users')
+      - ref('dim_addresses')
+      - ref('dim_products')
+      - ref('fact_product_conversion')
+      - ref('fact_page_views')
