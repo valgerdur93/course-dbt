@@ -1,0 +1,12 @@
+version: 2
+
+exposures:  
+  - name: Product Funnel Dashboard
+    description: >
+      Models that are critical to the product funnel dashboard
+    type: dashboard
+    maturity: high
+    owner:
+      name: Valgerður Tryggvadóttir
+    depends_on:
+      - ref('fact_product_funnel')

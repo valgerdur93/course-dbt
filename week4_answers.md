@@ -120,25 +120,43 @@ The products in the table above had the most inventory fluctations.
 ### Did we have any item go out of stock in the last 3 weeks?
 
 **Answer:**
-Yes, in week 3 two products were out of stock:  Pothos (product_id = 4cda01b9-62e2-46c5-830f-b7f262a58fb1) and String of pearls (product_id = fb0e8be7-5ac4-4a76-a1fa-2cc4bf0b2d80)
+Yes, in week 3 two products were out of stock:  
+- Pothos (product_id = 4cda01b9-62e2-46c5-830f-b7f262a58fb1)
+- String of pearls (product_id = fb0e8be7-5ac4-4a76-a1fa-2cc4bf0b2d80)
 
 
 
 ## Part 2:  Modeling challenge
 
-I added the model fact_product_funnel.sql under model/marts/product.  This table is an aggregated version of fact_page_views where we count sessions with page_views, sessions with an add_to_cart event and sessions with a checkout event on product level.
+I added the model fact_product_funnel.sql under model/marts/product.  This table is an aggregated version of fact_page_views where we count number of unique sessions for each event_type.
 
-The table fact_product_funnel was then used in the sigma dashboard created.  The product funnel was visualized and it is possible to filter by product.
+The table fact_product_funnel was then used in the sigma dashboard created where the product funnel was visualized.
 
 ### How are our users moving through the product funnel?
 
 **Answer:**
-TO DO
+578 sessions had a page view event, then 467 sessions (80%) also had an add to cart event and then 361 sessions (62%) had a checkout event.  This means that 42% of all sessions do not lead to a purchase.
+
+If we look at the drop off between add to cart and checkout, where the number of sessions go from 467 to 361.  It would be interesting to know why products are added to cart and then not purchased, is it because they go out of stock or is it because of a different reason.
+
+I created a Product Funnel dashboard for the Product and Engineering teams to be able to monitor the product funnel and purchases made.  This is a link to the dashboard: 
+ https://app.sigmacomputing.com/corise-dbt/workbook/workbook-4qBWAMm7fn2f4PhMTHBxT5?:link_source=share 
+
+In the dashboard we can see that the most popular product is String of pearls which went out of stock in week 3.  It is likely we had gotten more purchases for String of pearls if it had not been out of stock.
+
+In the dashboard we can also see that the revenue between states differ.  It would be interesting to understand why we have more purchases in certain states.
+
+
 
 ### Which steps in the funnel have the largest drop off points?
 
 **Answer:**  
-The largest drop off is between page views and add to cart.
+The largest drop off is between page views and add to cart, it is 20%.
+
+
+### Create an exposure
+
+An exposure for the Product Funnel dashboard was created and it can be seen in the DAG.
 
 
 ## Part 3:  Reflection questions
